@@ -1,0 +1,111 @@
+/* 2026-11-07: seção redesenhada — assumiu o lugar da antiga "Transforme seu
+   limite" (Card 3D, removida a pedido do cliente). Fundo azul da marca
+   (--color-secondary, via background="dark" do Section) só que agora a
+   própria <section> fica recuada das bordas da viewport (não mais
+   full-bleed) e com cantos arredondados, como um painel flutuante — pedido
+   explícito do cliente ("a div sera com borda arredondada e com uma margin
+   de uns 32px das laterais"). Só os cantos de CIMA são arredondados (pedido
+   do cliente, mesmo dia) — embaixo fica reto porque a seção seguinte
+   (Sobre/"Quem é a MultiMais") encosta direto nela, sem respiro. */
+.section {
+  margin-inline: var(--space-6);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+@media (max-width: 599px) {
+  /* 32px de cada lado é agressivo em 360px de viewport (296px úteis) —
+     reduzido na faixa mais estreita testada primeiro (regra mobile-first do
+     CLAUDE.md), volta ao valor pedido a partir de ~600px */
+  .section {
+    margin-inline: var(--space-4);
+  }
+}
+
+.header {
+  max-width: 48ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+  text-align: center;
+}
+
+.titulo {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-2);
+  color: inherit;
+}
+
+.subtitulo {
+  color: var(--color-secondary-light);
+}
+
+/* lista minimalista: sem cartões coloridos por passo (eram 4 cores
+   diferentes) — só número + texto, separados por uma linha fina, já que o
+   fundo inteiro agora é a cor da marca */
+.lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.passo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-6);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.passo:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.numero {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.passoTitulo {
+  font-size: var(--text-h3);
+  font-weight: 700;
+  color: inherit;
+}
+
+.passoDescricao {
+  color: var(--color-secondary-light);
+  max-width: 32ch;
+}
+
+.ctaWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-7);
+}
+
+@media (min-width: 768px) {
+  .lista {
+    flex-direction: row;
+  }
+
+  .passo {
+    flex: 1;
+    padding-block: 0;
+    padding-inline: var(--space-5);
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .passo:first-child {
+    border-left: none;
+  }
+}

@@ -1,0 +1,130 @@
+.footer {
+  background: var(--color-secondary);
+  color: var(--color-text-inverse);
+  padding-top: var(--space-section);
+  overflow: hidden;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7);
+  padding-bottom: var(--space-7);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-h3);
+  color: var(--color-text-inverse);
+}
+
+.descricao {
+  color: var(--color-secondary-light);
+  max-width: 36ch;
+}
+
+.coluna {
+  min-width: 0;
+}
+
+.colunaTitulo {
+  color: var(--color-secondary-light);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-3);
+}
+
+.coluna ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.coluna a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-inverse);
+}
+
+.coluna a:hover {
+  color: var(--color-secondary-light);
+}
+
+.endereco {
+  font-style: normal;
+  color: var(--color-text-inverse);
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.legais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.legais a {
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.copyright {
+  color: var(--color-secondary-light);
+  font-size: var(--text-small);
+}
+
+.wordmarkWrap {
+  overflow: hidden;
+  height: clamp(56px, 9vw, 130px);
+  margin-top: var(--space-8);
+}
+
+.wordmark {
+  margin: 0;
+  padding-inline: var(--space-4);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-text-inverse);
+  opacity: 0.9;
+  /* tratamento decorativo único (wordmark gigante, cortado na base do
+     rodapé — referência visual do cliente): tamanho em vw, fora da escala
+     de --text-* (que não cobre display gigante), não é um token reutilizável */
+  font-size: clamp(4rem, 16vw, 13rem);
+}
+
+@media (min-width: 768px) {
+  .top {
+    grid-template-columns: 1.4fr repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .top {
+    grid-template-columns: 1.4fr repeat(4, minmax(120px, 1fr));
+  }
+
+  .bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

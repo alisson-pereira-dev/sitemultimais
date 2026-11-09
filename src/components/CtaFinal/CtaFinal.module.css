@@ -1,0 +1,31 @@
+.section {
+  padding-block: var(--space-section);
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-primary-light));
+}
+
+.card {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-4);
+  padding: var(--space-8) var(--space-6);
+}
+
+.headline {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-3);
+}
+
+.subtexto {
+  color: var(--color-text-muted);
+  font-size: var(--text-body-lg);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: var(--space-9) var(--space-8);
+  }
+}

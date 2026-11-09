@@ -1,0 +1,196 @@
+/* 2026-11-07 — marquee "atendimento humanizado" (4 faixas), fiel ao arquivo
+   de referência do cliente, com estas substituições documentadas:
+   - --text (#8D0DE3, roxo de outra marca) → var(--color-secondary) (navy da MultiMais)
+   - --font (nuSansDisplay, fonte licenciada de outra marca) → var(--font-heading) (Sora)
+   - --space-x2/x4/x6 (8/16/24px) → var(--space-2)/var(--space-4)/var(--space-5), que já
+     batem exatamente com a escala de espaçamento do projeto — sem precisar de exceção
+   - fotos → gradiente com as cores da marca (--c1/--c2) em vez de hex soltos, enquanto a
+     foto real da equipe não chega (ver docs/assets-needed.md); já pronto pra receber
+     `item.foto` no content.json e trocar pra imagem real sem mexer no CSS
+   Demais valores (durações, atrasos, letter-spacing, alturas, tamanhos de foto, fórmulas
+   de clamp por breakpoint) são literais do arquivo — mesma exceção documentada já usada
+   em Vantagens/Reveal/Serviços (fidelidade pedida explicitamente pelo cliente). */
+
+/* título + frase reais, pro leitor de tela — as 4 faixas abaixo são aria-hidden */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip-path: inset(50%);
+}
+
+/* a seção em si precisa cortar o excesso do breakout (.rows vai além do
+   container de 1280px pra sangrar até a borda da janela) */
+.sectionBleed {
+  overflow-x: hidden;
+}
+
+.rows {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-2);
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+@media (min-width: 1200px) {
+  .rows {
+    gap: var(--space-4);
+  }
+}
+
+.row {
+  grid-column: 1 / -1;
+  height: 100px;
+  overflow: hidden;
+}
+
+@media (min-width: 1200px) {
+  .row {
+    height: 160px;
+  }
+}
+
+.track {
+  display: inline-block;
+  white-space: nowrap;
+  width: max-content;
+  will-change: transform;
+  backface-visibility: hidden;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--dur);
+  animation-delay: var(--delay);
+}
+
+.row.left .track {
+  animation-name: sobreMarqueeLeft;
+}
+
+.row.right .track {
+  animation-name: sobreMarqueeRight;
+}
+
+@keyframes sobreMarqueeLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes sobreMarqueeRight {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* velocidades/atrasos medidos no arquivo de referência — não alterar, é o
+   que faz as 4 faixas ficarem desencontradas e naturais */
+.r1 {
+  --dur: 84s;
+  --delay: -29.4s;
+}
+
+.r2 {
+  --dur: 240s;
+  --delay: 0s;
+}
+
+.r3 {
+  --dur: 156s;
+  --delay: -109.2s;
+}
+
+.r4 {
+  --dur: 240s;
+  --delay: -48s;
+}
+
+.item {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-inline-end: var(--space-4);
+}
+
+@media (min-width: 1200px) {
+  .item {
+    margin-inline-end: var(--space-5);
+  }
+}
+
+.pic {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  margin-inline-end: var(--space-4);
+  object-fit: cover;
+  object-position: 72% 52%;
+  background: linear-gradient(150deg, var(--c1), var(--c2));
+  transform: translateZ(0);
+}
+
+img.pic {
+  background: none;
+}
+
+@media (min-width: 1200px) {
+  .pic {
+    width: 160px;
+    height: 160px;
+    margin-inline-end: var(--space-5);
+  }
+}
+
+.txt {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -3.4px;
+  color: var(--color-secondary);
+  font-size: 64px;
+  line-height: 100px;
+}
+
+.destaque {
+  color: var(--color-primary);
+}
+
+@media (min-width: 768px) {
+  .txt {
+    font-size: clamp(4rem, 2.2181rem + 3.7123vw, 5rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .txt {
+    font-size: clamp(5rem, -23.6432rem + 38.191vw, 9.75rem);
+    line-height: 160px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .txt {
+    font-size: 9.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+    transform: translate3d(-17.5%, 0, 0);
+  }
+}

@@ -1,0 +1,87 @@
+.card {
+  position: relative;
+  /* sem isso, o card ficava do tamanho do próprio conteúdo — mesmo a grade
+     (Diferenciais.module.css) esticando o <li> pra altura da linha toda, o
+     <li> esticar não esticava o card branco visível dentro dele */
+  height: 100%;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-2);
+  transition:
+    transform var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-3);
+}
+
+/* recorta a ilustração decorativa (.illustration) nos cantos arredondados do
+   card, em vez de deixá-la vazar — só entra quando o item tem `imagem` */
+.hasImage {
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* dá respiro pro texto não ficar embaixo da ilustração no canto */
+.hasImage .content {
+  max-width: 62%;
+}
+
+/* ilustração decorativa, alinhada ao canto inferior direito do card — pedido
+   do cliente (2026-11-07). `position:absolute` não conta pra altura do card
+   (a altura vem da grade — todos os cards com `height:100%`, ver .card).
+   Caixa de proporção FIXA (não depende da proporção real de cada PNG — as 4
+   ilustrações não são todas iguais, ver docs/componentes.md): sem isso, a
+   de "Pagamento via PIX" (mais estreita/alta) apareceria maior que as
+   outras 3 pra mesma largura. `object-fit:contain` escala cada imagem pra
+   caber dentro dessa caixa sem esticar; `.hasImage{overflow:hidden}` corta
+   pelos cantos arredondados se ainda sobrar algo fora do card. */
+.illustrationWrap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  max-width: 150px;
+  aspect-ratio: 3 / 4;
+  pointer-events: none;
+}
+
+.illustration {
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diferencial .iconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.title {
+  font-size: var(--text-h3);
+  font-weight: 700;
+}
+
+.description {
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,36 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  min-height: 160px;
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-primary-light));
+  box-shadow: var(--shadow-3);
+  color: var(--color-secondary-medium);
+}
+
+.squircle {
+  border-radius: var(--radius-squircle);
+}
+
+.panel {
+  border-radius: var(--radius-xl);
+}
+
+/* usada só no carrossel de Vantagens, dentro de .cardInner (padding:10px) —
+   18px literal do arquivo de referência do cliente, concêntrico com os 24px
+   da borda externa do card; sem sombra própria (a referência não pede) */
+.card {
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  opacity: 0.55;
+}

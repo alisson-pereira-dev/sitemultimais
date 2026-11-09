@@ -1,0 +1,39 @@
+.wrap {
+  padding-block: var(--space-section);
+}
+
+.inner {
+  max-width: 72ch;
+  margin-inline: auto;
+}
+
+.banner {
+  background: var(--color-accent-light);
+  color: var(--color-text);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-7);
+  font-size: var(--text-small);
+}
+
+.titulo {
+  font-size: var(--text-h1);
+  margin-bottom: var(--space-7);
+}
+
+.secao {
+  margin-bottom: var(--space-6);
+}
+
+.secaoTitulo {
+  font-size: var(--text-h3);
+  margin-bottom: var(--space-2);
+}
+
+.secaoTexto {
+  color: var(--color-text-muted);
+}
+
+.contatoCta {
+  margin-top: var(--space-4);
+}

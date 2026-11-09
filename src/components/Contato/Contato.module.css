@@ -1,0 +1,85 @@
+.header {
+  max-width: 48ch;
+}
+
+.titulo {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-2);
+}
+
+.subtitulo {
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.actionButton {
+  width: 100%;
+}
+
+.endereco {
+  font-style: normal;
+  color: var(--color-text);
+  margin-top: var(--space-2);
+}
+
+.enderecoLink {
+  display: inline-block;
+  margin-top: var(--space-2);
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.horarios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.mapWrap {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  min-height: 420px;
+  box-shadow: var(--shadow-2);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 0;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .actionButton {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .mapWrap,
+  .map {
+    min-height: 520px;
+  }
+}

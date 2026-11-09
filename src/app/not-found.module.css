@@ -1,0 +1,35 @@
+.wrap {
+  min-height: calc(100svh - 64px - 220px);
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-section);
+}
+
+.etiqueta {
+  display: inline-flex;
+  background: var(--color-primary-light);
+  color: var(--color-secondary);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-small);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.titulo {
+  font-size: var(--text-h1);
+  margin-bottom: var(--space-4);
+}
+
+.texto {
+  color: var(--color-text-muted);
+  font-size: var(--text-body-lg);
+  max-width: 48ch;
+  margin-bottom: var(--space-6);
+}
+
+.ctaGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}

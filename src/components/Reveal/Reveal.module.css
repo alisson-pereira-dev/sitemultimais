@@ -1,0 +1,106 @@
+/* Efeito "cortina": a seção anterior (Vantagens) sobe e revela este bloco
+   fixo; a seguinte (Diferenciais) sobe e cobre. Só roda desktop (≥1024px) +
+   motion permitido — exceção pontual de motion, mesmo critério já usado no
+   Hero/Vantagens (ver docs/motion.md). Fora disso cai pra um bloco normal,
+   sem position:fixed nem deriva — fallback abaixo, antes do @media. */
+.reveal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+  padding-block: var(--space-9);
+}
+
+.pinned {
+  position: static;
+  width: 100%;
+}
+
+.box,
+.boxInner,
+.titlePos,
+.titleShift {
+  position: static;
+  width: 100%;
+}
+
+.titulo {
+  margin: 0;
+  max-width: 960px;
+  margin-inline: auto;
+  /* 2026-11-07: pedido do cliente pra branco, apesar do contraste — branco
+     sobre o laranja da marca é ~2.85:1, abaixo até do mínimo AA pra texto
+     grande (3:1). Mesmo caso já resolvido com --color-primary-contrast no
+     CTA principal, mas aqui o cliente escolheu manter branco mesmo assim. */
+  color: var(--color-text-inverse);
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  /* 2026-11-07: aumentado a pedido do cliente (era clamp(1.75rem…2.75rem) /
+     76.14px literal no desktop) */
+  font-size: clamp(2rem, 1.5rem + 2.2vw, 3.75rem);
+  line-height: 1.15;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .reveal {
+    display: block;
+    height: 100vh;
+    height: 100svh;
+    min-height: auto;
+    padding-block: 0;
+    background: none; /* o .pinned (abaixo) passa a cobrir o fundo */
+    /* um clip-path num ancestral recorta até descendentes position:fixed —
+       é isso que faz o .pinned só aparecer dentro da caixa desta seção,
+       mesmo sendo fixed (não acompanha o scroll) */
+    clip-path: inset(0);
+  }
+
+  .pinned {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+  }
+
+  .box {
+    position: absolute;
+    top: 80px;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .boxInner {
+    position: relative;
+    /* 960px (não os 856px literais do arquivo) — acompanha o título maior */
+    width: min(960px, calc(100% - 48px));
+    height: 100%;
+  }
+
+  .titlePos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+  }
+
+  .titleShift {
+    /* JS (Reveal.tsx) atualiza só o translateY a cada frame de scroll — o
+       -50% horizontal fica fixo aqui, nunca muda */
+    transform: translate(-50%, -44.14px);
+    will-change: transform;
+  }
+
+  .titulo {
+    /* 2026-11-07: aumentado a pedido do cliente (era 76.14px literal, igual
+       ao arquivo de referência) */
+    font-size: 100px;
+    line-height: 1;
+    letter-spacing: -3.4px;
+  }
+}

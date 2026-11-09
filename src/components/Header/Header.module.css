@@ -1,0 +1,232 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  background: transparent;
+  box-shadow: var(--shadow-0);
+  transition:
+    background-color var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+.scrolled {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-2);
+}
+
+/* sobre a foto escura da Hero, o anel de foco padrão (navy) ficaria invisível */
+.overHero a:focus-visible,
+.overHero button:focus-visible {
+  outline-color: var(--color-text-inverse);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.35);
+}
+
+.inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.logoMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-small);
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-secondary);
+  font-size: var(--text-body-lg);
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.overHero .logoText {
+  color: var(--color-text-inverse);
+}
+
+@media (max-width: 480px) {
+  .logoText {
+    display: none;
+  }
+}
+
+.nav {
+  display: none;
+}
+
+.nav ul {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.nav a {
+  position: relative;
+  display: inline-block;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-standard);
+}
+
+.overHero .nav a {
+  color: var(--color-text-inverse);
+}
+
+/* microinteração: texto laranja + leve "levantada" — em fundo claro usa
+   --color-primary-dark (o laranja puro no texto falha AA em cima do branco,
+   ~2.85:1); sobre a Hero escura o laranja puro já passa AA (~5.4:1), daí a
+   variante usar --color-primary — e sublinhado que cresce da esquerda na
+   cor do texto atual */
+.nav a:hover,
+.nav a:focus-visible {
+  color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.overHero .nav a:hover,
+.overHero .nav a:focus-visible {
+  color: var(--color-primary);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: var(--space-3);
+  right: var(--space-3);
+  bottom: 6px;
+  height: 2px;
+  border-radius: var(--radius-full);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+
+.nav a:hover::after,
+.nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .actions {
+    gap: var(--space-2);
+  }
+}
+
+.menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-secondary);
+  border-radius: var(--radius-full);
+  position: relative;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+
+.overHero .hamburger,
+.overHero .hamburger::before,
+.overHero .hamburger::after {
+  background: var(--color-text-inverse);
+}
+
+.hamburger::before {
+  top: -7px;
+}
+
+.hamburger::after {
+  top: 5px;
+}
+
+.panel {
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  background: var(--color-bg);
+  padding: var(--space-6) var(--space-4);
+  overflow-y: auto;
+  transform: translateY(calc(var(--reveal-distance) * -1));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dur-base) var(--ease-standard),
+    opacity var(--dur-base) var(--ease-standard);
+  z-index: var(--z-overlay);
+}
+
+.panelOpen {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.panel ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.panel a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  font-size: var(--text-h3);
+  font-weight: 600;
+  color: var(--color-secondary);
+}
+
+.panelCta {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    display: block;
+  }
+
+  .menuToggle,
+  .panel {
+    display: none;
+  }
+}

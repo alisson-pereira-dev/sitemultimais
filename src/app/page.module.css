@@ -1,0 +1,33 @@
+/* Dúvidas → Fale com a gente → Vamos resolver isso agora?: cada seção
+   sobrepõe a anterior ao rolar (pedido do cliente). Técnica: seções-irmãs
+   dentro de um wrapper comum, sticky top:0 + z-index crescente — a seguinte
+   sobe por cima da anterior (que fica presa no topo) em vez de só empilhar.
+   Mesmo critério já usado na sobreposição Hero→Métricas→Vantagens (ver
+   docs/motion.md, S01): só desktop (≥1024px) e prefers-reduced-motion:
+   no-preference; fora disso, empilhamento padrão, sem sobreposição, sem JS. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .stack {
+    position: relative;
+  }
+
+  .stack > :global(#faq),
+  .stack > :global(#contato) {
+    position: sticky;
+    top: 0;
+  }
+
+  .stack > :global(#faq) {
+    z-index: 1;
+  }
+
+  .stack > :global(#contato) {
+    z-index: 2;
+  }
+
+  .stack > :global(#cta-final) {
+    /* precisa ser positioned pra z-index valer — sem isso o navegador pinta
+       o CTA final (static) atrás do Contato (sticky), que é positioned */
+    position: relative;
+    z-index: 3;
+  }
+}

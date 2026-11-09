@@ -1,0 +1,243 @@
+{
+  "site": {
+    "nome": "MultiMais Negócios",
+    "slogan": "Simule agora!",
+    "lang": "pt-BR",
+    "dominio": "",
+    "contato": {
+      "whatsapp": { "numero": "5575982492050", "mensagem_padrao": "Olá! Quero simular um crédito com a MultiMais." },
+      "telefone": "(75) 99192-5544",
+      "email": "",
+      "endereco": { "logradouro": "Praça Clementino Fraga, nº 15 - Centro", "cidade": "Muritiba", "uf": "BA", "cep": "44340-000", "plus_code": "92F5+RP Muritiba, Bahia", "lat": -12.6254059, "lng": -38.9906447, "mapa_url": "https://www.google.com/maps/place/MultiMais+Neg%C3%B3cios/@-12.6254222,-38.9906387,21z/data=!4m15!1m8!3m7!1s0x715bf57618ddf5f:0xd0139007f884b7c!2sPra%C3%A7a+Clementino+Fraga,+15+-+Centro,+Muritiba+-+BA,+44340-000!3b1!8m2!3d-12.6248334!4d-38.9912946!16s%2Fg%2F11yjgr8kwp!3m5!1s0x715bfea85535923:0x9eaee1a4a9ce7750!8m2!3d-12.6254059!4d-38.9906447!16s%2Fg%2F11wwzj8nmj?entry=ttu&g_ep=EgoyMDI2MTEwMy4wIKXMDSoASAFQAw%3D%3D" },
+      "horarios": [{ "dias": "Segunda a sexta", "horas": "08:00 às 17:30", "validar": true }]
+    },
+    "redes": { "instagram": "https://instagram.com/multimais_negocios" },
+    "ctas": {
+      "principal": { "texto": "Simular no WhatsApp", "destino": "@contato.whatsapp", "tipo": "whatsapp" },
+      "secundario": { "texto": "Ligar agora", "destino": "@contato.telefone", "tipo": "telefone" }
+    },
+    "menu": [
+      { "rotulo": "Serviços", "destino": "#servicos" },
+      { "rotulo": "Como funciona", "destino": "#como-funciona" },
+      { "rotulo": "Dúvidas", "destino": "#faq" },
+      { "rotulo": "Contato", "destino": "#contato" }
+    ],
+    "logo": { "src": "pendente", "alt": "MultiMais Negócios" }
+  },
+
+  "seo": {
+    "home": {
+      "titulo": "MultiMais Negócios | Crédito e Soluções Financeiras em Muritiba",
+      "descricao": "Empréstimo, crédito pessoal, consórcio, abertura de conta e saque FGTS em Muritiba-BA. Atendimento rápido e humanizado. Simule agora pelo WhatsApp.",
+      "og_imagem": { "src": "pendente", "alt": "MultiMais Negócios" },
+      "schema": { "tipo": "LocalBusiness", "campos": { "endereco": "@contato.endereco", "telefone": "@contato.telefone" } }
+    }
+  },
+
+  "secoes": {
+    "hero": {
+      "headline": "Precisando de dinheiro? A gente resolve.",
+      "subheadline": "Empréstimo pessoal com análise rápida e atendimento humanizado, direto aqui em Muritiba.",
+      "destaque": "Atendimento humanizado em Muritiba, BA",
+      "cta": "@ctas.principal",
+      "cta_secundario": "@ctas.secundario",
+      "midia": { "src": "/images/hero.png", "alt": "Casal sorridente, representando o atendimento humanizado da MultiMais Negócios" }
+    },
+
+    "metricas": {
+      "itens": [
+        { "valor": "+500", "descricao": "Pessoas atendidas em Muritiba e região", "validar": true },
+        { "valor": "R$ 2 milhões+", "descricao": "Em crédito já facilitado", "validar": true },
+        { "valor": "24h", "descricao": "Tempo médio de resposta", "validar": true },
+        { "valor": "+5 anos", "descricao": "De atendimento na região", "validar": true }
+      ]
+    },
+
+    "vantagens": {
+      "subtitulo": "A gente sabe como é",
+      "destaque": "Uma conta\nque chega de surpresa",
+      "slides": [
+        {
+          "titulo": "Imprevisto financeiro",
+          "legenda": "Surgiu uma despesa que não dava pra prever e faltou dinheiro na hora certa.",
+          "icone": "alerta",
+          "midia": { "src": "/images/slide_asce00.jpg", "alt": "Senhora olhando preocupada para uma conta em casa" }
+        },
+        {
+          "titulo": "Aperto no cartão",
+          "legenda": "O limite apertou e as contas continuam chegando.",
+          "icone": "cartao",
+          "midia": { "src": "/images/slide_asce01.jpg", "alt": "Senhora pagando uma compra com cartão em um pequeno comércio" }
+        },
+        {
+          "titulo": "Falta de planejamento",
+          "legenda": "Difícil organizar sozinho quando o dia a dia não para.",
+          "icone": "calendario",
+          "midia": { "src": "/images/slide_asce03.jpg", "alt": "Senhor organizando as contas com calculadora e caderno" }
+        }
+      ],
+      "transicao": "É pra isso que a MultiMais existe.",
+      "cta": "@ctas.principal"
+    },
+
+    "reveal": {
+      "titulo": "A vida não espera o dinheiro aparecer"
+    },
+
+    "diferenciais": {
+      "titulo": "Por que simular com a gente",
+      "itens": [
+        {
+          "icone": "relogio",
+          "titulo": "Análise rápida",
+          "descricao": "Resposta ágil, sem enrolação.",
+          "imagem": { "src": "/images/peson_analise_rapida.png", "alt": "", "width": 1133, "height": 1483 }
+        },
+        {
+          "icone": "pix",
+          "titulo": "Pagamento via PIX",
+          "descricao": "O dinheiro cai direto na sua conta.",
+          "imagem": { "src": "/images/peson_pagamento_via_pix.png", "alt": "", "width": 923, "height": 1476 }
+        },
+        {
+          "icone": "aperto-de-mao",
+          "titulo": "Atendimento humanizado",
+          "descricao": "Conversa de pessoa pra pessoa, sem robô.",
+          "imagem": { "src": "/images/peson_atendimento_humanizado.png", "alt": "", "width": 1133, "height": 1483 }
+        },
+        {
+          "icone": "escudo",
+          "titulo": "Respeito e confiança",
+          "descricao": "Explicamos tudo antes de você decidir.",
+          "imagem": { "src": "/images/peson_respeito_confianca.png", "alt": "", "width": 1133, "height": 1483 }
+        }
+      ]
+    },
+
+    "servicos": {
+      "titulo": "Nossos serviços",
+      "subtitulo": "Soluções para organizar sua vida financeira",
+      "itens": [
+        {
+          "nome": "Empréstimo pessoal",
+          "descricao_curta": "Crédito rápido para o que você precisar.",
+          "icone": "dinheiro",
+          "imagem": { "src": "/images/serv_emprestimo_pessoal.jpg", "alt": "Senhora sorrindo enquanto mexe no celular", "width": 1792, "height": 2400 }
+        },
+        {
+          "nome": "Crédito pessoal",
+          "descricao_curta": "Condições acessíveis e facilitadas.",
+          "icone": "carteira",
+          "imagem": { "src": "/images/serv_credito_pessoal.jpg", "alt": "Senhor organizando contas e segurando um cartão de crédito", "width": 1792, "height": 2400 }
+        },
+        {
+          "nome": "Consórcio",
+          "descricao_curta": "Planeje uma conquista sem juros de empréstimo.",
+          "icone": "chave",
+          "imagem": { "src": "/images/serv_consorc.jpg", "alt": "Senhor e senhora sorrindo, olhando juntos para um notebook", "width": 1792, "height": 2400 }
+        },
+        {
+          "nome": "Abertura de contas",
+          "descricao_curta": "A gente ajuda você a abrir sua conta.",
+          "icone": "banco",
+          "imagem": { "src": "/images/serv_abertura_de_contas.jpg", "alt": "Senhor usando o celular na rua", "width": 1792, "height": 2400 }
+        },
+        {
+          "nome": "Saque FGTS",
+          "descricao_curta": "Antecipe seu FGTS de forma simples.",
+          "icone": "cofre",
+          "imagem": { "src": "/images/serv_saque_fgts.jpg", "alt": "Senhora sorrindo enquanto mexe no celular, sentada no sofá", "width": 1792, "height": 2400 }
+        },
+        {
+          "nome": "Limite do cartão em dinheiro",
+          "descricao_curta": "Transforme o limite do seu cartão em dinheiro na mão, via PIX.",
+          "icone": "cartao",
+          "imagem": { "src": "/images/serv_limite_card.jpg", "alt": "Senhor sorrindo segurando um cartão de crédito", "width": 1792, "height": 2400 }
+        }
+      ]
+    },
+
+    "como_funciona": {
+      "titulo": "Como funciona",
+      "subtitulo": "Simples, do jeito que tem que ser",
+      "passos": [
+        { "numero": 1, "titulo": "Chame no WhatsApp", "descricao": "Clique no botão e conte o que você precisa." },
+        { "numero": 2, "titulo": "Conte pra gente", "descricao": "Nossa equipe explica as opções e tira suas dúvidas." },
+        { "numero": 3, "titulo": "Análise rápida", "descricao": "Avaliamos seu caso sem demora." },
+        { "numero": 4, "titulo": "Dinheiro na conta", "descricao": "Aprovado, o valor cai via PIX." }
+      ],
+      "cta": "@ctas.principal"
+    },
+
+    "sobre": {
+      "titulo": "Quem é a MultiMais",
+      "itens": [
+        { "texto": "Atendimento" },
+        { "texto": "humanizado", "destaque": true },
+        { "texto": "de pessoa" },
+        { "texto": "pra pessoa." }
+      ],
+      "fotos": [
+        { "src": "/images/atendimento_human_01.jpg", "alt": "" },
+        { "src": "/images/atendimento_human_02.jpg", "alt": "" },
+        { "src": "/images/atendimento_human_03.jpg", "alt": "" },
+        { "src": "/images/atendimento_human_04.jpg", "alt": "" },
+        { "src": "/images/atendimento_human_05.jpg", "alt": "" }
+      ],
+      "validar": true
+    },
+
+    "faq": {
+      "titulo": "Dúvidas frequentes",
+      "perguntas": [
+        { "pergunta": "É seguro contratar com a MultiMais?", "resposta": "Sim. Conversamos com você antes de qualquer decisão e explicamos todas as condições com clareza.", "validar": true },
+        { "pergunta": "Quais documentos eu preciso?", "resposta": "Normalmente RG, CPF e comprovante de renda. Nossa equipe confirma exatamente o que é preciso pelo WhatsApp.", "validar": true },
+        { "pergunta": "Quanto tempo demora pra sair o dinheiro?", "resposta": "A análise é rápida. Depois de aprovado, o valor é pago via PIX.", "validar": true },
+        { "pergunta": "Posso simular sem compromisso?", "resposta": "Sim, simular não tem custo nem obrigação.", "validar": true }
+      ]
+    },
+
+    "contato": {
+      "titulo": "Fale com a gente",
+      "subtitulo": "Estamos na Praça Clementino Fraga, 15, Centro, Muritiba",
+      "whatsapp": "@contato.whatsapp",
+      "telefone": "@contato.telefone",
+      "endereco": "@contato.endereco",
+      "horarios": "@contato.horarios"
+    },
+
+    "cta_final": {
+      "headline": "Vamos resolver isso agora?",
+      "subtexto": "Fale com a gente no WhatsApp e simule sem compromisso.",
+      "cta": "@ctas.principal"
+    },
+
+    "footer": {
+      "descricao_curta": "Soluções financeiras em Muritiba, com atendimento humano.",
+      "colunas": [
+        { "titulo": "Navegação", "links": [{ "rotulo": "Serviços", "destino": "#servicos" }, { "rotulo": "Como funciona", "destino": "#como-funciona" }, { "rotulo": "Dúvidas", "destino": "#faq" }, { "rotulo": "Contato", "destino": "#contato" }] }
+      ],
+      "links_legais": [
+        { "rotulo": "Política de Privacidade", "destino": "/privacidade" },
+        { "rotulo": "Termos de Uso", "destino": "/termos" }
+      ],
+      "copyright": "© 2026 MultiMais Negócios"
+    }
+  },
+
+  "microcopy": {
+    "pagina_404": { "titulo": "Página não encontrada", "texto": "Essa página não existe, mas a gente pode te ajudar do mesmo jeito.", "cta": { "texto": "Falar no WhatsApp", "destino": "@contato.whatsapp", "tipo": "whatsapp" } },
+    "acessibilidade": { "pular_para_conteudo": "Pular para o conteúdo", "abrir_menu": "Abrir menu", "fechar_menu": "Fechar menu" }
+  },
+
+  "meta": {
+    "gerado_em": "2026-11-04",
+    "versao": "2",
+    "pendencias_validar": [
+      { "caminho": "secoes.metricas.itens", "motivo": "números ilustrativos (pedido do cliente pra preencher o slide por enquanto) — confirmar valores reais antes do lançamento" },
+      { "caminho": "site.contato.horarios", "motivo": "confirmar horário completo da semana (só vimos quarta no print do Google)" },
+      { "caminho": "secoes.sobre.itens", "motivo": "frase do marquee é formulação provisória minha ('Atendimento humanizado de pessoa pra pessoa.'), não confirmada pelo cliente como texto final de marca" },
+      { "caminho": "secoes.faq", "motivo": "respostas precisam de validação da equipe (documentos, prazos, segurança)" }
+    ]
+  }
+}

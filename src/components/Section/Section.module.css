@@ -1,0 +1,13 @@
+.section {
+  padding-block: var(--space-section);
+  background: var(--color-bg);
+}
+
+.alt {
+  background: var(--color-bg-alt);
+}
+
+.dark {
+  background: var(--color-secondary);
+  color: var(--color-text-inverse);
+}
