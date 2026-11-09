@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { content } from "@/lib/content";
+import { content, isPendente } from "@/lib/content";
 import { resolveCtaHref } from "@/lib/whatsapp";
 import { Button } from "@/components/Button/Button";
 import styles from "./Header.module.css";
@@ -75,10 +76,23 @@ export function Header() {
     >
       <div className={`container ${styles.inner}`}>
         <a href="#inicio" className={styles.logo} aria-label={content.site.nome}>
-          <span className={styles.logoMark} aria-hidden="true">
-            M+
-          </span>
-          <span className={styles.logoText}>{content.site.nome}</span>
+          {isPendente(content.site.logo.src) ? (
+            <>
+              <span className={styles.logoMark} aria-hidden="true">
+                M+
+              </span>
+              <span className={styles.logoText}>{content.site.nome}</span>
+            </>
+          ) : (
+            <Image
+              src={content.site.logo.src}
+              alt=""
+              width={content.site.logo.width ?? 1774}
+              height={content.site.logo.height ?? 887}
+              className={styles.logoImage}
+              priority
+            />
+          )}
         </a>
 
         <nav className={styles.nav} aria-label="Principal">

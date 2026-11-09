@@ -63,9 +63,18 @@
   color: var(--color-text-inverse);
 }
 
+.logoImage {
+  height: 40px;
+  width: auto;
+}
+
 @media (max-width: 480px) {
   .logoText {
     display: none;
+  }
+
+  .logoImage {
+    height: 32px;
   }
 }
 

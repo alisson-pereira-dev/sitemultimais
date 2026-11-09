@@ -22,7 +22,7 @@
       { "rotulo": "Dúvidas", "destino": "#faq" },
       { "rotulo": "Contato", "destino": "#contato" }
     ],
-    "logo": { "src": "pendente", "alt": "MultiMais Negócios" }
+    "logo": { "src": "/images/Logo_multimais.png", "alt": "MultiMais Negócios", "width": 1774, "height": 887 }
   },
 
   "seo": {
