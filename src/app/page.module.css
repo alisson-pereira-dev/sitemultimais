@@ -31,3 +31,36 @@
     z-index: 3;
   }
 }
+
+/* Vantagens → Reveal ("A vida não espera...") → Diferenciais: mesma técnica
+   acima (sticky + z-index crescente), só que no mobile (<1024px) em vez de
+   desktop. No mobile, a Reveal usava antes `position:fixed` + `clip-path`
+   (ver Reveal.module.css) — causava lag real de repintura em WebKit/iPhone
+   (seções distantes chegavam a renderizar com layout de um frame anterior;
+   ver docs/sections/reveal.md item 10). `sticky` é nativamente mais barato
+   pro navegador que `fixed`+`clip-path`+JS, sem precisar de truque de
+   recorte. Desktop continua com o efeito GSAP/clip-path próprio (mais
+   elaborado, já validado) — por isso esse bloco só roda <1024px. */
+@media (max-width: 1023.98px) and (prefers-reduced-motion: no-preference) {
+  .revealStack {
+    position: relative;
+  }
+
+  .revealStack > :global(#vantagens) {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .revealStack > :global(#reveal) {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  .revealStack > :global(#diferenciais) {
+    /* precisa ser positioned pra z-index valer (mesma ressalva do #cta-final acima) */
+    position: relative;
+    z-index: 3;
+  }
+}

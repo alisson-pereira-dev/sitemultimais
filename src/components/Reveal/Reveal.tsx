@@ -94,7 +94,7 @@ export function Reveal() {
   }, [isDesktop, prefersReducedMotion]);
 
   return (
-    <div className={styles.reveal} ref={sectionRef}>
+    <div id="reveal" className={styles.reveal} ref={sectionRef}>
       <div className={styles.pinned}>
         <div className={styles.box}>
           <div className={styles.boxInner}>
