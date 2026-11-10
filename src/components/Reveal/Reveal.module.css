@@ -1,8 +1,9 @@
 /* Efeito "cortina": a seção anterior (Vantagens) sobe e revela este bloco
-   fixo; a seguinte (Diferenciais) sobe e cobre. Só roda desktop (≥1024px) +
-   motion permitido — exceção pontual de motion, mesmo critério já usado no
-   Hero/Vantagens (ver docs/motion.md). Fora disso cai pra um bloco normal,
-   sem position:fixed nem deriva — fallback abaixo, antes do @media. */
+   fixo; a seguinte (Diferenciais) sobe e cobre. 2026-11-10: reativado também
+   no mobile, mesmo modo que o desktop (decisão anterior que restringia a
+   >=1024px foi revertida a pedido do cliente) — só continua condicionado a
+   motion permitido. Fora disso (reduced-motion) cai pra um bloco normal, sem
+   position:fixed nem deriva — fallback abaixo, antes do @media. */
 .reveal {
   position: relative;
   display: flex;
@@ -44,7 +45,7 @@
   line-height: 1.15;
 }
 
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .reveal {
     display: block;
     height: 100vh;
@@ -77,7 +78,8 @@
 
   .boxInner {
     position: relative;
-    /* 960px (não os 856px literais do arquivo) — acompanha o título maior */
+    /* 960px (não os 856px literais do arquivo) — acompanha o título maior;
+       calc(100% - 48px) já garante respiro lateral em qualquer largura */
     width: min(960px, calc(100% - 48px));
     height: 100%;
   }
@@ -91,14 +93,18 @@
 
   .titleShift {
     /* JS (Reveal.tsx) atualiza só o translateY a cada frame de scroll — o
-       -50% horizontal fica fixo aqui, nunca muda */
+       -50% horizontal fica fixo aqui, nunca muda, em qualquer largura */
     transform: translate(-50%, -44.14px);
     will-change: transform;
   }
+}
 
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .titulo {
-    /* 2026-11-07: aumentado a pedido do cliente (era 76.14px literal, igual
-       ao arquivo de referência) */
+    /* literal do arquivo de referência (desktop) — abaixo de 1024px o título
+       continua na escala fluida do clamp() base (.titulo acima), que já
+       cabe em 360–430px; replicar o 100px fixo aqui estourava a tela
+       (bug já corrigido nesta seção antes da reativação mobile) */
     font-size: 100px;
     line-height: 1;
     letter-spacing: -3.4px;

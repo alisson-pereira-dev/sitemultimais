@@ -37,14 +37,14 @@
 
 ## 7. Motion
 - Nível: **exceção pontual de motion** (mesmo espírito do N2 do Hero, mas um efeito próprio, não documentado nas 10 regras de `09-MOTION` como receita padrão) — pedida explicitamente pelo cliente, com arquivo de referência detalhado
-- Desktop (≥1024px) + `prefers-reduced-motion: no-preference`: `position:fixed` + `clip-path` + deriva do título via scroll (`requestAnimationFrame`, `{passive:true}`)
-- Fora disso (mobile OU reduced-motion): a seção cai pra um bloco normal — sem `position:fixed`, sem `clip-path`, sem deriva; só um bloco em degradê laranja centralizado com o título parado, em fluxo normal de página (nunca "pinado")
-- Reduced-motion (mesmo em desktop): título fica parado na posição de repouso (`REST = -44.14px`, convertido pro fallback), sem nenhum deslocamento
-- Fallback sem JS: o efeito central (cortina — pin + revela + cobre) é **100% CSS**, funciona sem nenhuma linha de JS, contanto que a tela seja ≥1024px (a media query do CSS não depende de JS pra existir). Só a deriva do título depende de JS; sem JS o título fica parado na posição de repouso definida no CSS (`transform` padrão do `.titleShift`)
+- **2026-11-10: reativado no mobile, mesmo modo que o desktop** (decisão anterior que restringia a ≥1024px foi revertida a pedido do cliente) — `prefers-reduced-motion: no-preference` (qualquer largura): `position:fixed` + `clip-path` + deriva do título via scroll (`requestAnimationFrame`, `{passive:true}`). O único valor que continua ≥1024px (literal do arquivo de referência, 100px) é o `font-size` do título — abaixo disso ele usa a escala fluida do `clamp()` base, que evita o bug de texto cortado já corrigido antes dessa reativação (ver item 10).
+- Reduced-motion (qualquer largura): a seção cai pra um bloco normal — sem `position:fixed`, sem `clip-path`, sem deriva; só um bloco em degradê laranja centralizado com o título parado, em fluxo normal de página (nunca "pinado"), na posição de repouso (`REST = -44.14px`, convertido pro fallback)
+- Fallback sem JS: o efeito central (cortina — pin + revela + cobre) é **100% CSS**, funciona sem nenhuma linha de JS, em qualquer largura (a media query do CSS não depende de JS pra existir). Só a deriva do título depende de JS; sem JS o título fica parado na posição de repouso definida no CSS (`transform` padrão do `.titleShift`)
 - Cuidado replicado do arquivo: nenhum ancestral de `.pinned` pode ter `transform`/`filter`/`will-change:transform` — isso quebraria o `position:fixed` (passaria a ser relativo a esse ancestral, não à viewport)
+- Risco conhecido (mobile): `position:fixed` com a barra de endereço retrátil de navegadores móveis pode se comportar de forma inconsistente entre browsers — mitigado com `height:100svh` (unidade "small viewport height", já no CSS como fallback depois do `100vh`), mas não validado em iOS/Android reais neste ambiente.
 
 ## 8. Mobile
-- Bloco estático normal (degradê laranja, título centralizado, sem pin/deriva) — ver item 7
+- Mesmo efeito do desktop (pin + cortina + deriva do título) desde 2026-11-10 — ver item 7. Só muda o tamanho do título (escala fluida, não o 100px literal do desktop).
 
 ## 9. Critérios de aceite
 - (DoD padrão, com a exceção de motion documentada acima)

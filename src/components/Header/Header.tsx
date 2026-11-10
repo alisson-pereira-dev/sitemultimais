@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { content, isPendente } from "@/lib/content";
 import { resolveCtaHref } from "@/lib/whatsapp";
 import { Button } from "@/components/Button/Button";
@@ -119,7 +120,11 @@ export function Header() {
             aria-label={menuOpen ? a11y.fechar_menu : a11y.abrir_menu}
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span className={styles.hamburger} aria-hidden="true" />
+            {menuOpen ? (
+              <X width={20} height={20} strokeWidth={1.8} aria-hidden="true" />
+            ) : (
+              <Menu width={20} height={20} strokeWidth={1.8} aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>

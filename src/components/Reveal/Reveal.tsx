@@ -3,14 +3,14 @@
 import { useEffect, useRef } from "react";
 import { content } from "@/lib/content";
 import { useReducedMotion } from "@/lib/useReducedMotion";
-import { useIsDesktop } from "@/lib/useIsDesktop";
 import styles from "./Reveal.module.css";
 
 // Tabela medida no site de referência (cliente, 2026-11-07): u = topo da
 // seção ÷ altura da viewport, limitado a [-1, 1]; ty = deriva do título em
 // px. Curva não é linear (inclina mais nas pontas) — por isso a tabela em
-// vez de uma conta direta. Só se aplica no desktop com motion permitido
-// (mobile/reduced-motion usam bloco estático, sem deriva — ver abaixo).
+// vez de uma conta direta. 2026-11-10: roda em qualquer largura (reativado
+// no mobile, mesmo modo que o desktop) — só não roda com reduced-motion
+// (bloco estático, sem deriva — ver abaixo).
 const TY_TABLE: [number, number][] = [
   [-1.0, -76.14],
   [-0.7945, -68.56],
@@ -41,22 +41,17 @@ function tyAt(u: number) {
 export function Reveal() {
   const { titulo } = content.secoes.reveal;
   const prefersReducedMotion = useReducedMotion();
-  const isDesktop = useIsDesktop("(min-width: 1024px)");
   const sectionRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
 
-  // o efeito (fundo fixo + deriva) só roda desktop + motion permitido — fora
-  // disso o CSS (ver Reveal.module.css) já cai sozinho pra um bloco normal,
-  // sem position:fixed; aqui só garante o título parado no repouso
+  // o efeito (fundo fixo + deriva) roda em qualquer largura com motion
+  // permitido — fora disso o CSS (ver Reveal.module.css) já cai sozinho pra
+  // um bloco normal, sem position:fixed; aqui só garante o título parado
   useEffect(() => {
     const title = titleRef.current;
     if (!title) return;
 
-    if (!isDesktop || prefersReducedMotion) {
-      // mobile/reduced-motion: .titleShift é bloco estático (sem o ancora
-      // `left:50%` do desktop), já centralizado por `text-align` — o -50%
-      // horizontal aqui empurraria o título pra fora da tela (bug visto no
-      // mobile), então não aplica transform nenhum.
+    if (prefersReducedMotion) {
       title.style.transform = "";
       return;
     }
@@ -87,7 +82,7 @@ export function Reveal() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", update);
     };
-  }, [isDesktop, prefersReducedMotion]);
+  }, [prefersReducedMotion]);
 
   return (
     <div className={styles.reveal} ref={sectionRef}>

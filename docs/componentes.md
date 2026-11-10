@@ -26,13 +26,19 @@ Padroniza largura (1280px), padding lateral e `--space-section` vertical, com `i
 
 ## Botão
 **Formato (desde 2026-11-05):** pílula (`--radius-full`) nas 3 variantes.
-**Variantes:** Primário (laranja, único CTA principal, ícone `IconWhatsAppBadge` — círculo preenchido + glifo branco, autocontido, na cor do texto — à esquerda, automático, não precisa passar prop) · Secundário (contorno azul) · Terciário (texto, sem fundo)
+**Variantes:** Primário (laranja, único CTA principal) · Secundário (contorno azul) · Terciário (texto, sem fundo). **Correção (2026-11-10):** o `Button` nunca teve ícone automático embutido — a doc antiga citava um `IconWhatsAppBadge` que não existia mais na implementação; removido daqui e do código (estava sem uso).
 **Tamanhos:** md (44px) · lg (48px, Hero e CTA final)
 **Estados:** padrão · hover (`brightness(1.1)` + "levanta" `translateY(-2px)` + `shadow-3`, nunca troca de cor) · active (`translateY(0) scale(0.97)`) · focus-visible (anel `--color-focus-ring` + borda `--color-focus-border`) · disabled · loading
 **Regra:** rótulo é verbo + resultado ("Simular no WhatsApp"), nunca "Clique aqui". Primário aparece no máximo uma vez por dobra. Texto do primário continua na cor corrigida pro contraste AA (navy, não branco) — ver nota do T1.1/T1.13 em `docs/tasks.md`.
 
 ## CTA flutuante (WhatsApp) — mobile
-Botão circular fixo no canto inferior direito, ícone WhatsApp, respeita safe-area, alvo ≥ 48px. Some quando o CTA do header já está visível na viewport (evita duplicar). Entra com fade curto (R1, CSS) depois do primeiro scroll.
+Botão circular fixo no canto inferior direito, ícone WhatsApp, respeita safe-area, alvo ≥ 48px. Some quando o CTA do header já está visível na viewport (evita duplicar) **e quando o rodapé entra na tela** (2026-11-10 — mesma lógica de IntersectionObserver, pra nunca sobrepor o conteúdo do footer). Entra com fade curto (R1, CSS) depois do primeiro scroll.
+
+## Ícones
+**Biblioteca única (2026-11-10):** `lucide-react` — antes do site todo (SVGs desenhados à mão em `src/components/Icons/Icons.tsx`, que saíam malformados em alguns tamanhos, ex. o glifo do WhatsApp no CTA flutuante). `src/components/Icons/Icons.tsx` continua sendo o ponto único de import (mesmos nomes `IconXxx` de antes, só a implementação interna trocou), pra não precisar tocar em todo chamador.
+**Traço:** 1.8 (mais fino que o padrão 2 da lib, pra manter o peso visual já usado) · `currentColor` — a cor vem sempre do container (círculo/quadrado laranja ou navy já existente), nunca fixada no ícone.
+**Tamanho:** 24px por padrão (ícone dentro de card/chip — Diferenciais, Serviços, Vantagens) · 20px explícito via `width`/`height` quando o ícone está sozinho dentro de um botão circular de ação (setas de carrossel, menu do Header, CTA flutuante, chevron do Faq). Ícones inline ao lado de texto (rodapé, selo do Hero) mantêm seus tamanhos já existentes (16/18px), fora dessa regra binária.
+**Sem ícone de marca:** a Lucide é uma lib genérica, sem logos — não existe ícone oficial de WhatsApp/Instagram nela. `IconWhatsApp` usa `MessageCircle` (balão de conversa) e `IconInstagram` usa `Camera`, como substitutos semânticos — sinalizado, não é o logo oficial da marca.
 
 ## Card
 Componente único com variantes de conteúdo:

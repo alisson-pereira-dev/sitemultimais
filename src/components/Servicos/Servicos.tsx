@@ -172,7 +172,7 @@ export function Servicos() {
                 disabled={!swiperReady}
                 onClick={() => swiperRef.current?.slidePrev()}
               >
-                <IconChevronLeft />
+                <IconChevronLeft width={20} height={20} />
               </button>
               <button
                 type="button"
@@ -181,7 +181,7 @@ export function Servicos() {
                 disabled={!swiperReady}
                 onClick={() => swiperRef.current?.slideNext()}
               >
-                <IconChevronRight />
+                <IconChevronRight width={20} height={20} />
               </button>
             </div>
           </div>
@@ -208,7 +208,7 @@ export function Servicos() {
             aria-label="Serviço anterior"
             onClick={() => scrollByCard(-1)}
           >
-            <IconChevronLeft />
+            <IconChevronLeft width={20} height={20} />
           </button>
           <button
             type="button"
@@ -216,7 +216,7 @@ export function Servicos() {
             aria-label="Próximo serviço"
             onClick={() => scrollByCard(1)}
           >
-            <IconChevronRight />
+            <IconChevronRight width={20} height={20} />
           </button>
         </div>
       </div>

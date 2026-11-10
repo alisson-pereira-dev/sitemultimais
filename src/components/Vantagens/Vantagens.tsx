@@ -184,7 +184,7 @@ export function Vantagens() {
 
                   <span className={styles.chip}>
                     <span className={styles.chipIcon}>
-                      <Icon width={22} height={22} />
+                      <Icon width={24} height={24} />
                     </span>
                     <span className={styles.srOnly}>{slide.legenda}</span>
                   </span>
@@ -223,10 +223,10 @@ export function Vantagens() {
 
         <div className={styles.arrows}>
           <button type="button" className={styles.arrow} aria-label="Slide anterior" onClick={() => rotate(-1)}>
-            <IconChevronLeft />
+            <IconChevronLeft width={20} height={20} />
           </button>
           <button type="button" className={styles.arrow} aria-label="Próximo slide" onClick={() => rotate(1)}>
-            <IconChevronRight />
+            <IconChevronRight width={20} height={20} />
           </button>
         </div>
       </div>

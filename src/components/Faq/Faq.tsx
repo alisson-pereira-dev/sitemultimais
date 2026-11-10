@@ -50,6 +50,8 @@ export function Faq() {
                   >
                     <span>{pergunta.pergunta}</span>
                     <IconChevronDown
+                      width={20}
+                      height={20}
                       className={`${styles.chevron} ${open ? styles.chevronOpen : ""}`}
                     />
                   </button>

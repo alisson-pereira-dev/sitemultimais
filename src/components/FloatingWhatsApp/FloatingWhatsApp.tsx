@@ -51,7 +51,7 @@ export function FloatingWhatsApp() {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
     >
-      <IconWhatsApp width={28} height={28} />
+      <IconWhatsApp width={20} height={20} />
     </a>
   );
 }
