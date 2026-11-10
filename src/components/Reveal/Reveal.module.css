@@ -1,14 +1,18 @@
 /* Efeito "cortina": a seção anterior (Vantagens) sobe e revela este bloco
    fixo; a seguinte (Diferenciais) sobe e cobre. 2026-11-10: reativado no
-   mobile, revertido no mesmo dia (lag de repintura real em WebKit/iPhone —
-   seções distantes chegaram a renderizar com largura/posição de um frame
-   anterior durante rolagem rápida), depois reativado de novo com
-   `contain: paint` no ancestral clipado (abaixo) — pedido explícito do
-   cliente de manter a mesma técnica do desktop, não substituir por outra.
-   `contain: paint` garante ao navegador que nada aqui dentro pinta fora
-   desta caixa (e vice-versa), isolando o repaint caro do `clip-path`+
-   `fixed` do resto da página — é o que faltava sem trocar de técnica.
-   Retestado em WebKit com scroll rápido programático antes de subir. */
+   mobile, revertido (lag de repintura real em WebKit/iPhone), reativado de
+   novo com `contain:paint` no `.reveal` — ERRO: `contain:paint` (igual
+   `transform`/`filter`) faz o próprio elemento virar o *containing block*
+   dos descendentes `position:fixed`, o que quebra o truque inteiro — o
+   `.pinned` deixa de fixar na viewport e passa a rolar junto com `.reveal`
+   (confirmado medindo `getBoundingClientRect().top` do `.pinned` em scrolls
+   diferentes: variava igual ao scroll, devia ficar sempre 0). É por isso
+   que o `clip-path` foi escolhido pro `.reveal` desde o início — ele NÃO
+   cria containing block pra fixed, diferente de transform/filter/contain.
+   `contain:paint` removido do `.reveal`; mantido só em `.pinned` (que já É
+   o elemento fixed — conter o próprio subtree dele é seguro) + o
+   `transform:translateZ(0)` nele mesmo, como reforço pro WebKit sem
+   quebrar o posicionamento. */
 .reveal {
   position: relative;
   display: flex;
@@ -62,10 +66,6 @@
        é isso que faz o .pinned só aparecer dentro da caixa desta seção,
        mesmo sendo fixed (não acompanha o scroll) */
     clip-path: inset(0);
-    /* isola o repaint desta seção do resto da página (ver nota acima) —
-       sem isso, testei em WebKit e o lag de repintura do fixed+clip-path
-       chegava a corromper visualmente seções bem mais abaixo na rolagem */
-    contain: paint;
   }
 
   .pinned {
@@ -73,8 +73,13 @@
     inset: 0;
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
-    /* força a própria camada de composição (GPU) — reforço extra pro mesmo
-       problema de repintura do WebKit, além do contain:paint acima */
+    /* reforço pro lag de repintura do WebKit (ver nota acima): isola o
+       subtree dele (`contain:paint`, seguro aqui — ele já É o elemento
+       fixed, não um ancestral) e força camada de composição própria
+       (`translateZ`), sem mexer no `.reveal` (que precisa continuar só com
+       `clip-path`, sem transform/filter/contain, pra não virar containing
+       block do fixed) */
+    contain: paint;
     transform: translateZ(0);
   }
 
