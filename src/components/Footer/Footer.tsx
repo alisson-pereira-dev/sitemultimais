@@ -7,6 +7,10 @@ import styles from "./Footer.module.css";
 export function Footer() {
   const footer = content.secoes.footer;
   const { nome, contato, redes } = content.site;
+  // wordmark gigante corta no mobile com o nome completo — abaixo de 640px
+  // (ver Footer.module.css) troca pela 1ª palavra, derivada do próprio
+  // content.json (nunca um texto novo fixado aqui)
+  const nomeCurto = nome.split(" ")[0];
 
   return (
     <footer className={styles.footer}>
@@ -85,7 +89,8 @@ export function Footer() {
       </div>
 
       <div className={styles.wordmarkWrap} aria-hidden="true">
-        <p className={styles.wordmark}>{nome}</p>
+        <p className={`${styles.wordmark} ${styles.wordmarkFull}`}>{nome}</p>
+        <p className={`${styles.wordmark} ${styles.wordmarkShort}`}>{nomeCurto}</p>
       </div>
     </footer>
   );

@@ -18,7 +18,7 @@ Tokens usados (`styles/design-tokens.css`): `--dur-fast` 150ms · `--dur-base` 2
 ## S01 Hero
 - Nível: N1 (texto/CTA, R1) + N2 (parallax de fundo, R4, GSAP ScrollTrigger) + N2 (sobreposição com S03, ver abaixo)
 - Desktop: stagger de 80ms entre headline → subheadline → CTA (`--dur-slow`); fundo desloca ≤10% da altura ao rolar (só `transform`)
-- Mobile: mesma sequência de texto, mais curta; parallax **desligado**
+- Mobile: mesma sequência de texto, mais curta; **2026-11-10: parallax de fundo reativado** (decisão anterior que desligava só nessa largura foi revertida a pedido do cliente) — mesmo ≤10%, só `transform`, `will-change` aplicado só enquanto a ScrollTrigger está viva. A sobreposição Hero→Métricas→Vantagens (abaixo) continua desktop-only, não foi incluída nessa reativação.
 - Reduced-motion: tudo aparece direto, sem deslocamento; parallax desligado
 - Cuidado: imagem de fundo não é a imagem de prioridade de LCP; parallax não aplica na imagem crítica
 - Fallback JS: headline, subheadline e CTA já estão no HTML visíveis por padrão

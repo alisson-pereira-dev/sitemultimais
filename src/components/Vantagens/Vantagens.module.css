@@ -291,3 +291,38 @@
     display: flex;
   }
 }
+
+/* indicador de swipe no layout de 1 card por vez (<700px, ver computeLayout
+   em Vantagens.tsx) — substitui o "card espiando" parcial, ilegível em
+   360–430px */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+}
+
+.dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #cbc9c8;
+  transition: background-color 0.2s, width 0.2s;
+}
+
+.dotActive::before {
+  width: 20px;
+  background: var(--color-primary);
+}

@@ -7,22 +7,39 @@ import { IconWhatsApp } from "@/components/Icons/Icons";
 import styles from "./FloatingWhatsApp.module.css";
 
 export function FloatingWhatsApp() {
-  const [visible, setVisible] = useState(false);
+  // páginas sem Hero (404, privacidade, termos) não têm CTA próprio na
+  // primeira dobra — inicializa já visível nesse caso, calculado uma vez no
+  // mount (não dentro do efeito, pra não disparar um setState síncrono nele)
+  const [heroOut, setHeroOut] = useState(
+    () => typeof document !== "undefined" && !document.getElementById("inicio")
+  );
+  const [nearFooter, setNearFooter] = useState(false);
 
   useEffect(() => {
     const hero = document.getElementById("inicio");
-    if (!hero) {
-      // páginas sem Hero (404, privacidade, termos) não têm CTA próprio na
-      // primeira dobra — mostra o botão direto.
-      const showByDefault = () => setVisible(true);
-      showByDefault();
-      return;
-    }
+    if (!hero) return;
 
-    const observer = new IntersectionObserver(([entry]) => setVisible(!entry.isIntersecting));
+    const observer = new IntersectionObserver(([entry]) => setHeroOut(!entry.isIntersecting));
     observer.observe(hero);
     return () => observer.disconnect();
   }, []);
+
+  // some antes do rodapé chegar perto o bastante de sobrepor o botão
+  // (mesma técnica do observer acima, só que no fim da página) — margem
+  // negativa do tamanho do próprio botão + respiro, pra esconder assim que
+  // ele chegaria a cobrir o conteúdo, não só quando o rodapé já apareceu todo
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(([entry]) => setNearFooter(entry.isIntersecting), {
+      rootMargin: "0px 0px -88px 0px",
+    });
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
+  const visible = heroOut && !nearFooter;
 
   return (
     <a

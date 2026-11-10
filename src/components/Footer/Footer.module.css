@@ -115,6 +115,27 @@
   font-size: clamp(4rem, 16vw, 13rem);
 }
 
+.wordmarkShort {
+  display: none;
+}
+
+/* <640px: "MultiMais Negócios" estoura a largura mesmo no piso do clamp
+   (4rem) e corta na borda — mostra só a 1ª palavra (nomeCurto, Footer.tsx) e
+   reduz o piso do clamp, pra nunca cortar o texto */
+@media (max-width: 639px) {
+  .wordmarkFull {
+    display: none;
+  }
+
+  .wordmarkShort {
+    display: block;
+  }
+
+  .wordmark {
+    font-size: clamp(2.75rem, 15vw, 4rem);
+  }
+}
+
 @media (min-width: 768px) {
   .top {
     grid-template-columns: 1.4fr repeat(auto-fit, minmax(140px, 1fr));

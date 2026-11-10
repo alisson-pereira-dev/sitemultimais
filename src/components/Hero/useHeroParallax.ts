@@ -4,10 +4,17 @@ import { useEffect, type RefObject } from "react";
 import type gsap from "gsap";
 
 // Parallax leve (N2) do fundo do Hero — GSAP ScrollTrigger, só nesta seção.
-// Desktop apenas (>=1024px, mesmo breakpoint em que o Hero vira split 2 colunas)
-// e nunca com prefers-reduced-motion. Carregado sob demanda (import dinâmico) para
+// 2026-11-10: reativado também no mobile (decisão anterior que restringia a
+// >=1024px foi revertida a pedido do cliente) — roda em qualquer largura,
+// nunca com prefers-reduced-motion. Carregado sob demanda (import dinâmico) para
 // não pesar no caminho crítico do LCP; só anima `y` (transform) da camada decorativa,
-// nunca a mídia do Hero (que é a imagem prioritária do LCP).
+// nunca a mídia do Hero (que é a imagem prioritária do LCP), deslocamento
+// sempre ≤10% da altura da seção.
+//
+// A sobreposição Hero→Métricas→Vantagens (painel do Hero "atrasando" até 35%
+// da altura) continua desktop-only (>=1024px): é um efeito diferente, exigido
+// pelo cliente só nessa largura, e o deslocamento de 35% ultrapassa o teto de
+// 10% definido pro parallax leve — não faz parte desta reativação.
 export function useHeroParallax(
   heroRef: RefObject<HTMLElement | null>,
   layerRef: RefObject<HTMLDivElement | null>,
@@ -29,6 +36,35 @@ export function useHeroParallax(
       gsap.registerPlugin(ScrollTrigger);
       mm = gsap.matchMedia();
 
+      // Blob decorativo (parallax leve, ≤10%): qualquer largura, só motion permitido.
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const hero = heroRef.current;
+        const layer = layerRef.current;
+        if (!hero || !layer) return;
+
+        const distance = hero.offsetHeight * 0.08; // ≤10% da altura da seção
+        layer.style.willChange = "transform";
+
+        const tween = gsap.to(layer, {
+          y: distance,
+          ease: "none",
+          scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        return () => {
+          tween.scrollTrigger?.kill();
+          tween.kill();
+          layer.style.willChange = "";
+        };
+      });
+
+      // Sobreposição Hero → Métricas → Vantagens (painel "atrasa" até 35% da
+      // altura): efeito distinto, continua desktop-only (ver nota acima).
       mm.add(
         {
           isDesktop: "(min-width: 1024px)",
@@ -40,22 +76,8 @@ export function useHeroParallax(
             reduceMotion: boolean;
           };
           const hero = heroRef.current;
-          const layer = layerRef.current;
           const panel = panelRef.current;
-          if (!isDesktop || reduceMotion || !hero || !layer) return;
-
-          const distance = hero.offsetHeight * 0.08; // ≤10% da altura da seção
-
-          gsap.to(layer, {
-            y: distance,
-            ease: "none",
-            scrollTrigger: {
-              trigger: hero,
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          });
+          if (!isDesktop || reduceMotion || !hero || !panel) return;
 
           // Paralax de verdade: o painel do Hero acompanha o scroll mais
           // devagar que a página (atrasa) enquanto Métricas e Vantagens sobem
@@ -67,7 +89,7 @@ export function useHeroParallax(
           // Metricas/Vantagens) garantem que quem vem depois pinte por cima
           // quando as duas coisas se sobrepuserem na tela.
           const vantagens = document.querySelector<HTMLElement>("#vantagens");
-          if (panel && vantagens) {
+          if (vantagens) {
             gsap.fromTo(
               panel,
               { y: 0 },

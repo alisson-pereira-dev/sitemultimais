@@ -15,7 +15,6 @@ import styles from "./Vantagens.module.css";
 // exceção pontual documentada, igual a `docs/sections/vantagens.md` explica.
 const GAP = 16;
 const INACTIVE_DESKTOP = 253;
-const INACTIVE_MOBILE = 207;
 const SMALL_BREAKPOINT = 700;
 const TRANSITION = "left .5s cubic-bezier(.4,0,.2,1), width .5s cubic-bezier(.4,0,.2,1)";
 
@@ -33,14 +32,22 @@ function renderLines(text: string) {
 }
 
 function computeLayout(viewportWidth: number, pos: number[]) {
-  const small = viewportWidth < SMALL_BREAKPOINT;
-  const inactive = small ? INACTIVE_MOBILE : INACTIVE_DESKTOP;
-  const visible = small ? 2 : 3;
-  const active = viewportWidth - (visible - 1) * (inactive + GAP);
+  // <700px: 1 card em largura quase total por vez — os recolhidos ficam
+  // fora da tela (sem "espiar" parcialmente, que ficava ilegível em 360–430px
+  // com os valores literais do arquivo de referência, ver docs/sections/
+  // vantagens.md item 10). Troca por swipe ou pelos dots (ver .dots).
+  if (viewportWidth < SMALL_BREAKPOINT) {
+    return {
+      widths: pos.map(() => viewportWidth),
+      lefts: pos.map((p) => (p === 0 ? 0 : viewportWidth)),
+    };
+  }
+
+  const active = viewportWidth - 2 * (INACTIVE_DESKTOP + GAP);
 
   return {
-    widths: pos.map((p) => (p === 0 ? active : inactive)),
-    lefts: pos.map((p) => (p === 0 ? 0 : active + GAP + (p - 1) * (inactive + GAP))),
+    widths: pos.map((p) => (p === 0 ? active : INACTIVE_DESKTOP)),
+    lefts: pos.map((p) => (p === 0 ? 0 : active + GAP + (p - 1) * (INACTIVE_DESKTOP + GAP))),
   };
 }
 
@@ -55,6 +62,8 @@ export function Vantagens() {
   const [layout, setLayout] = useState<{ widths: number[]; lefts: number[] } | null>(null);
   // começa `true`: o 1º layout aplicado não deve animar (ver efeitos abaixo)
   const [instant, setInstant] = useState(true);
+  // controla a exibição dos dots (só no layout de 1 card por vez, <700px)
+  const [isSmall, setIsSmall] = useState(false);
 
   const n = slides.length;
 
@@ -68,7 +77,10 @@ export function Vantagens() {
   // aplica o layout sempre que a fila (pos) muda — roda no mount e em cada rotate()
   useLayoutEffect(() => {
     const vw = viewportRef.current?.clientWidth;
-    if (vw) setLayout(computeLayout(vw, pos));
+    if (vw) {
+      setLayout(computeLayout(vw, pos));
+      setIsSmall(vw < SMALL_BREAKPOINT);
+    }
   }, [pos]);
 
   // religa a transição depois de 2 requestAnimationFrame — mesma técnica do
@@ -88,7 +100,10 @@ export function Vantagens() {
     function onResize() {
       setInstant(true);
       const vw = viewportRef.current?.clientWidth;
-      if (vw) setLayout(computeLayout(vw, posRef.current));
+      if (vw) {
+        setLayout(computeLayout(vw, posRef.current));
+        setIsSmall(vw < SMALL_BREAKPOINT);
+      }
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setInstant(false));
       });
@@ -179,6 +194,25 @@ export function Vantagens() {
           );
         })}
       </div>
+
+      {isSmall && n > 1 && (
+        <div className={styles.dots} role="tablist" aria-label="Selecionar card">
+          {slides.map((slide, index) => {
+            const isActive = pos[index] === 0;
+            return (
+              <button
+                key={slide.titulo}
+                type="button"
+                className={`${styles.dot} ${isActive ? styles.dotActive : ""}`}
+                role="tab"
+                aria-selected={isActive}
+                aria-label={`Mostrar: ${slide.titulo}`}
+                onClick={() => !isActive && rotate(pos[index])}
+              />
+            );
+          })}
+        </div>
+      )}
 
       <p className={styles.transicao}>{transicao}</p>
 
