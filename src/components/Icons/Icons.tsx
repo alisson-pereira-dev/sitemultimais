@@ -12,7 +12,6 @@ import {
   CreditCard,
   AlertTriangle,
   Calendar,
-  MessageCircle,
   Phone,
   MapPin,
   Camera,
@@ -52,7 +51,24 @@ export const IconCofre = icon(Vault);
 export const IconCartao = icon(CreditCard);
 export const IconAlerta = icon(AlertTriangle);
 export const IconCalendario = icon(Calendar);
-export const IconWhatsApp = icon(MessageCircle);
+
+// Glifo oficial da marca (2026-11-10, asset enviado pelo cliente em
+// public/images/Digital_Glyph_*_RGB_2026.svg — kit de marca do WhatsApp) —
+// único ícone do site que não vem do Lucide, por não ser um ícone genérico.
+// Variante branca: os dois usos atuais (CTA flutuante laranja, link do
+// rodapé em fundo navy) são sobre fundo escuro. Se aparecer um uso em fundo
+// claro, trocar pra Digital_Glyph_Black ou Digital_Glyph_Green (mesma pasta).
+export function IconWhatsApp({
+  width = 24,
+  height = 24,
+  className,
+}: Pick<SVGProps<SVGSVGElement>, "width" | "height" | "className">) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- SVG estático pequeno, decorativo; não precisa do pipeline de otimização do next/image
+    <img src="/images/Digital_Glyph_White_RGB_2026.svg" alt="" aria-hidden="true" width={width} height={height} className={className} />
+  );
+}
+
 export const IconTelefone = icon(Phone);
 export const IconMapaPin = icon(MapPin);
 // Lucide é uma lib genérica, sem logos de marca — não existe ícone oficial
