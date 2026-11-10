@@ -36,9 +36,10 @@
 
   "secoes": {
     "hero": {
-      "headline": "Precisando de dinheiro? A gente resolve.",
+      "headline": "Precisando de dinheiro? A gente ajuda você a resolver.",
       "subheadline": "Empréstimo pessoal com análise rápida e atendimento humanizado, direto aqui em Muritiba.",
       "destaque": "Atendimento humanizado em Muritiba, BA",
+      "selo": "Simulação rápida, sem compromisso",
       "cta": "@ctas.principal",
       "cta_secundario": "@ctas.secundario",
       "midia": { "src": "/images/hero.png", "alt": "Casal sorridente, representando o atendimento humanizado da MultiMais Negócios" }
@@ -77,7 +78,7 @@
         }
       ],
       "transicao": "É pra isso que a MultiMais existe.",
-      "cta": "@ctas.principal"
+      "cta": { "texto": "Quero resolver isso", "destino": "@contato.whatsapp", "tipo": "whatsapp", "mensagem": "Olá! Quero resolver uma situação financeira com a ajuda da MultiMais." }
     },
 
     "reveal": {
@@ -122,37 +123,43 @@
           "nome": "Empréstimo pessoal",
           "descricao_curta": "Crédito rápido para o que você precisar.",
           "icone": "dinheiro",
-          "imagem": { "src": "/images/serv_emprestimo_pessoal.jpg", "alt": "Senhora sorrindo enquanto mexe no celular", "width": 1792, "height": 2400 }
+          "imagem": { "src": "/images/serv_emprestimo_pessoal.jpg", "alt": "Senhora sorrindo enquanto mexe no celular", "width": 1792, "height": 2400 },
+          "cta": { "texto": "Simular empréstimo", "mensagem": "Olá! Quero simular um empréstimo pessoal com a MultiMais." }
         },
         {
           "nome": "Crédito pessoal",
           "descricao_curta": "Condições acessíveis e facilitadas.",
           "icone": "carteira",
-          "imagem": { "src": "/images/serv_credito_pessoal.jpg", "alt": "Senhor organizando contas e segurando um cartão de crédito", "width": 1792, "height": 2400 }
+          "imagem": { "src": "/images/serv_credito_pessoal.jpg", "alt": "Senhor organizando contas e segurando um cartão de crédito", "width": 1792, "height": 2400 },
+          "cta": { "texto": "Simular crédito pessoal", "mensagem": "Olá! Quero simular um crédito pessoal com a MultiMais." }
         },
         {
           "nome": "Consórcio",
           "descricao_curta": "Planeje uma conquista sem juros de empréstimo.",
           "icone": "chave",
-          "imagem": { "src": "/images/serv_consorc.jpg", "alt": "Senhor e senhora sorrindo, olhando juntos para um notebook", "width": 1792, "height": 2400 }
+          "imagem": { "src": "/images/serv_consorc.jpg", "alt": "Senhor e senhora sorrindo, olhando juntos para um notebook", "width": 1792, "height": 2400 },
+          "cta": { "texto": "Simular consórcio", "mensagem": "Olá! Quero simular um consórcio com a MultiMais." }
         },
         {
           "nome": "Abertura de contas",
           "descricao_curta": "A gente ajuda você a abrir sua conta.",
           "icone": "banco",
-          "imagem": { "src": "/images/serv_abertura_de_contas.jpg", "alt": "Senhor usando o celular na rua", "width": 1792, "height": 2400 }
+          "imagem": { "src": "/images/serv_abertura_de_contas.jpg", "alt": "Senhor usando o celular na rua", "width": 1792, "height": 2400 },
+          "cta": { "texto": "Simular abertura de conta", "mensagem": "Olá! Quero abrir uma conta com a MultiMais." }
         },
         {
           "nome": "Saque FGTS",
           "descricao_curta": "Antecipe seu FGTS de forma simples.",
           "icone": "cofre",
-          "imagem": { "src": "/images/serv_saque_fgts.jpg", "alt": "Senhora sorrindo enquanto mexe no celular, sentada no sofá", "width": 1792, "height": 2400 }
+          "imagem": { "src": "/images/serv_saque_fgts.jpg", "alt": "Senhora sorrindo enquanto mexe no celular, sentada no sofá", "width": 1792, "height": 2400 },
+          "cta": { "texto": "Simular saque FGTS", "mensagem": "Olá! Quero simular o saque do FGTS com a MultiMais." }
         },
         {
           "nome": "Limite do cartão em dinheiro",
           "descricao_curta": "Transforme o limite do seu cartão em dinheiro na mão, via PIX.",
           "icone": "cartao",
-          "imagem": { "src": "/images/serv_limite_card.jpg", "alt": "Senhor sorrindo segurando um cartão de crédito", "width": 1792, "height": 2400 }
+          "imagem": { "src": "/images/serv_limite_card.jpg", "alt": "Senhor sorrindo segurando um cartão de crédito", "width": 1792, "height": 2400 },
+          "cta": { "texto": "Transformar meu limite", "mensagem": "Olá! Quero transformar o limite do meu cartão em dinheiro com a MultiMais." }
         }
       ]
     },
@@ -166,7 +173,7 @@
         { "numero": 3, "titulo": "Análise rápida", "descricao": "Avaliamos seu caso sem demora." },
         { "numero": 4, "titulo": "Dinheiro na conta", "descricao": "Aprovado, o valor cai via PIX." }
       ],
-      "cta": "@ctas.principal"
+      "cta": { "texto": "Começar agora", "destino": "@contato.whatsapp", "tipo": "whatsapp", "mensagem": "Olá! Quero começar agora a simular com a MultiMais." }
     },
 
     "sobre": {
@@ -209,7 +216,7 @@
     "cta_final": {
       "headline": "Vamos resolver isso agora?",
       "subtexto": "Fale com a gente no WhatsApp e simule sem compromisso.",
-      "cta": "@ctas.principal"
+      "cta": { "texto": "Simular sem compromisso", "destino": "@contato.whatsapp", "tipo": "whatsapp", "mensagem": "Olá! Quero simular sem compromisso com a MultiMais." }
     },
 
     "footer": {

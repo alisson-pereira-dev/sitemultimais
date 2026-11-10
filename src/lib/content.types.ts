@@ -2,6 +2,9 @@ export interface Cta {
   texto: string;
   destino: string;
   tipo: "whatsapp" | "telefone";
+  /** mensagem pré-preenchida do WhatsApp, só pra tipo "whatsapp" — sem isso,
+   * usa `site.contato.whatsapp.mensagem_padrao` (ver resolveCtaHref) */
+  mensagem?: string;
 }
 
 export interface MenuItem {
@@ -67,6 +70,7 @@ export interface HeroSection {
   headline: string;
   subheadline: string;
   destaque: string;
+  selo: string;
   cta: Cta;
   cta_secundario: Cta;
   midia: Media;
@@ -120,6 +124,10 @@ export interface ServicoItem {
   icone: string;
   /** opcional — foto real do serviço (nem todos têm ainda) */
   imagem?: Media;
+  /** texto do CTA e mensagem do WhatsApp específicos deste serviço —
+   * usados no aria-label do card e no link (número continua o mesmo,
+   * `site.contato.whatsapp`) */
+  cta: { texto: string; mensagem: string };
 }
 
 export interface ServicosSection {

@@ -130,10 +130,10 @@ export function Servicos() {
                     <div className={`swiper-slide ${styles.slide}`} key={servico.nome}>
                       <a
                         className={styles.creativeCard}
-                        href={buildWhatsAppUrl(`Olá! Quero saber mais sobre: ${servico.nome}.`)}
+                        href={buildWhatsAppUrl(servico.cta.mensagem)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${servico.nome} — simular no WhatsApp`}
+                        aria-label={servico.cta.texto}
                       >
                         {servico.imagem ? (
                           <Image
@@ -236,10 +236,10 @@ export function Servicos() {
               <motion.li key={servico.nome} className={styles.item} variants={item}>
                 <a
                   className={styles.card}
-                  href={buildWhatsAppUrl(`Olá! Quero saber mais sobre: ${servico.nome}.`)}
+                  href={buildWhatsAppUrl(servico.cta.mensagem)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${servico.nome} — simular no WhatsApp`}
+                  aria-label={servico.cta.texto}
                 >
                   {servico.imagem && (
                     <div className={styles.cardMedia}>

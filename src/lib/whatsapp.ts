@@ -12,7 +12,7 @@ export function buildTelUrl(): string {
 }
 
 export function resolveCtaHref(cta: Cta): string {
-  if (cta.tipo === "whatsapp") return buildWhatsAppUrl();
+  if (cta.tipo === "whatsapp") return buildWhatsAppUrl(cta.mensagem);
   if (cta.tipo === "telefone") return buildTelUrl();
   return cta.destino;
 }

@@ -92,6 +92,9 @@ export function Hero() {
                 {hero.cta_secundario.texto}
               </Button>
             </motion.div>
+            <motion.p className={styles.selo} variants={item}>
+              {hero.selo}
+            </motion.p>
             <motion.p className={styles.destaque} variants={item}>
               <IconMapaPin width={18} height={18} aria-hidden="true" />
               {hero.destaque}
