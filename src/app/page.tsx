@@ -16,11 +16,9 @@ export default function Home() {
     <>
       <Hero />
       <Metricas />
-      <div className={styles.revealStack}>
-        <Vantagens />
-        <Reveal />
-        <Diferenciais />
-      </div>
+      <Vantagens />
+      <Reveal />
+      <Diferenciais />
       <Servicos />
       <ComoFunciona />
       <Sobre />

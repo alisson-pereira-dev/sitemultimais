@@ -1,15 +1,14 @@
 /* Efeito "cortina": a seção anterior (Vantagens) sobe e revela este bloco
    fixo; a seguinte (Diferenciais) sobe e cobre. 2026-11-10: reativado no
-   mobile por pedido do cliente, depois revertido de volta pra desktop-only
-   no mesmo dia — confirmei via teste em WebKit (motor do Safari/iPhone) que
-   o `clip-path` num ancestral + `position:fixed` descendente, rodando numa
-   página inteira de scroll (não só dentro de uma viewport-height contida),
-   causa lag real de repintura no mobile: seções inteiras (ex. "Como
-   funciona") chegaram a renderizar com a largura/posição de um frame
-   anterior por um instante durante rolagem rápida — provavelmente a causa
-   do desalinhamento relatado. Esse risco já estava sinalizado como não
-   validado quando reativei (ver docs/sections/reveal.md item 10); mantenho
-   só desktop (≥1024px), onde já era testado e estável antes de hoje. */
+   mobile, revertido no mesmo dia (lag de repintura real em WebKit/iPhone —
+   seções distantes chegaram a renderizar com largura/posição de um frame
+   anterior durante rolagem rápida), depois reativado de novo com
+   `contain: paint` no ancestral clipado (abaixo) — pedido explícito do
+   cliente de manter a mesma técnica do desktop, não substituir por outra.
+   `contain: paint` garante ao navegador que nada aqui dentro pinta fora
+   desta caixa (e vice-versa), isolando o repaint caro do `clip-path`+
+   `fixed` do resto da página — é o que faltava sem trocar de técnica.
+   Retestado em WebKit com scroll rápido programático antes de subir. */
 .reveal {
   position: relative;
   display: flex;
@@ -51,7 +50,7 @@
   line-height: 1.15;
 }
 
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .reveal {
     display: block;
     height: 100vh;
@@ -63,6 +62,10 @@
        é isso que faz o .pinned só aparecer dentro da caixa desta seção,
        mesmo sendo fixed (não acompanha o scroll) */
     clip-path: inset(0);
+    /* isola o repaint desta seção do resto da página (ver nota acima) —
+       sem isso, testei em WebKit e o lag de repintura do fixed+clip-path
+       chegava a corromper visualmente seções bem mais abaixo na rolagem */
+    contain: paint;
   }
 
   .pinned {
@@ -70,6 +73,9 @@
     inset: 0;
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-soft) 100%);
+    /* força a própria camada de composição (GPU) — reforço extra pro mesmo
+       problema de repintura do WebKit, além do contain:paint acima */
+    transform: translateZ(0);
   }
 
   .box {
@@ -84,7 +90,8 @@
 
   .boxInner {
     position: relative;
-    /* 960px (não os 856px literais do arquivo) — acompanha o título maior */
+    /* 960px (não os 856px literais do arquivo) — acompanha o título maior;
+       calc(100% - 48px) já garante respiro lateral em qualquer largura */
     width: min(960px, calc(100% - 48px));
     height: 100%;
   }
@@ -98,14 +105,17 @@
 
   .titleShift {
     /* JS (Reveal.tsx) atualiza só o translateY a cada frame de scroll — o
-       -50% horizontal fica fixo aqui, nunca muda */
+       -50% horizontal fica fixo aqui, nunca muda, em qualquer largura */
     transform: translate(-50%, -44.14px);
     will-change: transform;
   }
+}
 
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .titulo {
-    /* 2026-11-07: aumentado a pedido do cliente (era 76.14px literal, igual
-       ao arquivo de referência) */
+    /* literal do arquivo de referência (desktop) — abaixo de 1024px o título
+       continua na escala fluida do clamp() base (.titulo acima), que já
+       cabe em 360–430px */
     font-size: 100px;
     line-height: 1;
     letter-spacing: -3.4px;
