@@ -9,7 +9,8 @@ import styles from "./Reveal.module.css";
 // Tabela medida no site de referência (cliente, 2026-11-07): u = topo da
 // seção ÷ altura da viewport, limitado a [-1, 1]; ty = deriva do título em
 // px. Curva não é linear (inclina mais nas pontas) — por isso a tabela em
-// vez de uma conta direta. REST é o valor em u=0 (seção alinhada ao topo).
+// vez de uma conta direta. Só se aplica no desktop com motion permitido
+// (mobile/reduced-motion usam bloco estático, sem deriva — ver abaixo).
 const TY_TABLE: [number, number][] = [
   [-1.0, -76.14],
   [-0.7945, -68.56],
@@ -23,7 +24,6 @@ const TY_TABLE: [number, number][] = [
   [0.7945, -19.73],
   [1.0, -12.14],
 ];
-const REST = -44.14;
 
 function tyAt(u: number) {
   const clamped = Math.max(-1, Math.min(1, u));
@@ -53,7 +53,11 @@ export function Reveal() {
     if (!title) return;
 
     if (!isDesktop || prefersReducedMotion) {
-      title.style.transform = `translate(-50%, ${REST}px)`;
+      // mobile/reduced-motion: .titleShift é bloco estático (sem o ancora
+      // `left:50%` do desktop), já centralizado por `text-align` — o -50%
+      // horizontal aqui empurraria o título pra fora da tela (bug visto no
+      // mobile), então não aplica transform nenhum.
+      title.style.transform = "";
       return;
     }
 
