@@ -35,6 +35,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  /* alvo de toque >=44px mesmo com a imagem da logo menor (40px/32px) —
+     min-height no próprio flex container, sem mudar o tamanho da imagem */
+  min-height: 44px;
 }
 
 .logoMark {
