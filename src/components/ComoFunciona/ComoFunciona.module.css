@@ -21,11 +21,13 @@
   }
 }
 
+/* mobile: cabeçalho e passos alinhados à esquerda, pelo texto "Como
+   funciona" (pedido do cliente — a versão centralizada ficava com os
+   passos "flutuando" sem relação clara com o título). Centralizado só a
+   partir do desktop, quando a lista vira 4 colunas lado a lado. */
 .header {
   max-width: 48ch;
-  margin-inline: auto;
   margin-bottom: var(--space-7);
-  text-align: center;
 }
 
 .titulo {
@@ -49,10 +51,10 @@
 .passo {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--space-3);
   padding-block: var(--space-6);
-  text-align: center;
+  text-align: left;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
@@ -93,12 +95,19 @@
 }
 
 @media (min-width: 768px) {
+  .header {
+    margin-inline: auto;
+    text-align: center;
+  }
+
   .lista {
     flex-direction: row;
   }
 
   .passo {
     flex: 1;
+    align-items: center;
+    text-align: center;
     padding-block: 0;
     padding-inline: var(--space-5);
     border-top: none;
