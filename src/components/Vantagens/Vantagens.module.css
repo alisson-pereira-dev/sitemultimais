@@ -252,6 +252,7 @@
 .controls {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-4);
 }
 
@@ -287,6 +288,10 @@
 }
 
 @media (min-width: 768px) {
+  .controls {
+    justify-content: flex-start;
+  }
+
   .arrows {
     display: flex;
   }
