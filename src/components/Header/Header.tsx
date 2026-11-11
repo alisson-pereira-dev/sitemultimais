@@ -85,14 +85,22 @@ export function Header() {
               <span className={styles.logoText}>{content.site.nome}</span>
             </>
           ) : (
-            <Image
-              src={content.site.logo.src}
-              alt=""
-              width={content.site.logo.width ?? 1774}
-              height={content.site.logo.height ?? 887}
-              className={styles.logoImage}
-              priority
-            />
+            (() => {
+              // variante branca sobre a Hero (fundo escuro, antes de rolar) —
+              // a colorida fica ilegível em cima da foto; depois de rolar
+              // (fundo claro do header) volta pra colorida normal
+              const logo = overHero && content.site.logo_branco ? content.site.logo_branco : content.site.logo;
+              return (
+                <Image
+                  src={logo.src}
+                  alt=""
+                  width={logo.width ?? 1774}
+                  height={logo.height ?? 887}
+                  className={styles.logoImage}
+                  priority
+                />
+              );
+            })()
           )}
         </a>
 

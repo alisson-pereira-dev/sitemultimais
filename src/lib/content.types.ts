@@ -57,6 +57,8 @@ export interface Site {
   ctas: { principal: Cta; secundario: Cta };
   menu: MenuItem[];
   logo: Media;
+  /** variante branca, usada no header sobre a Hero (fundo escuro, antes de rolar) */
+  logo_branco?: Media;
 }
 
 export interface SeoHome {
