@@ -93,6 +93,12 @@
 
   /* ===== Camadas ===== */
   --z-base: 0; --z-sticky: 100; --z-dropdown: 200; --z-overlay: 300; --z-modal: 400; --z-toast: 500;
+
+  /* ===== Header ===== */
+  /* 2026-11-11: aumentada de 64px (era muito colada na borda de cima, pouco
+     respiro com a logo maior) — referenciada em várias seções (Hero,
+     Faq, Header, página 404) em vez de repetir o literal em cada arquivo */
+  --header-height: 76px;
 }
 
 @media (prefers-reduced-motion: reduce) {

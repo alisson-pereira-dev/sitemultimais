@@ -1,5 +1,5 @@
 .wrap {
-  min-height: calc(100svh - 64px - 220px);
+  min-height: calc(100svh - var(--header-height) - 220px);
   display: flex;
   align-items: center;
   padding-block: var(--space-section);

@@ -24,7 +24,7 @@
 }
 
 .inner {
-  height: 64px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -172,7 +172,7 @@
 .panel {
   position: fixed;
   inset: 0;
-  top: 64px;
+  top: var(--header-height);
   background: var(--color-bg);
   padding: var(--space-6) var(--space-4);
   overflow-y: auto;
