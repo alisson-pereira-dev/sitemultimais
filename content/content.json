@@ -38,7 +38,7 @@
   "secoes": {
     "hero": {
       "headline": "Precisando de dinheiro? A gente ajuda você a resolver.",
-      "subheadline": "Empréstimo pessoal com análise rápida e atendimento humanizado, direto aqui em Muritiba.",
+      "subheadline": "Empréstimo pessoal com análise rápida e gente de verdade te atendendo, direto aqui em Muritiba.",
       "destaque": "Atendimento humanizado em Muritiba, BA",
       "selo": "Simulação rápida, sem compromisso",
       "cta": "@ctas.principal",
@@ -103,8 +103,8 @@
         },
         {
           "icone": "aperto-de-mao",
-          "titulo": "Atendimento humanizado",
-          "descricao": "Conversa de pessoa pra pessoa, sem robô.",
+          "titulo": "Gente de verdade",
+          "descricao": "Você fala com uma pessoa, não com um robô.",
           "imagem": { "src": "/images/peson_atendimento_humanizado.png", "alt": "", "width": 1133, "height": 1483 }
         },
         {
